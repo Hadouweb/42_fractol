@@ -1,56 +1,58 @@
 #include "fractol.h"
 
-void		ft_generate_image(t_img *obj, int x, int y, unsigned int color)
+void		ft_generate_image(t_img *obj, int x, int y, t_color color)
 {
 	if (y < 0 || y > SIZE_H - 1 || x < 0 || x > SIZE_W - 1)
 		return ;
-	color = 0;
-	obj->data[y * obj->sizeline + x * obj->bpp / 8] = 0;
-	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 1] = 255;
-	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 2] = 255;
-	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 3] = 1;
+	obj->data[y * obj->sizeline + x * obj->bpp / 8] = color.r;
+	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 1] = color.g;
+	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 2] = color.b;
+	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 3] = color.a;
 }
 
-void			ft_draw(t_scene scn)
+t_color		ft_get_color(unsigned char r, unsigned char g,
+	unsigned char b, unsigned char a)
 {
-	double x1 = -0.5;
-	double x2 = 0.6;
-	double y1 = -1.2;
-	double y2 = 1.2;
-	double ite_max = scn.ite_max;
-	double zoom = scn.zoom;
+	t_color		color;
 
-	double image_x = (x2 - x1) * zoom;
-	double image_y = (y2 - y1) * zoom;
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	color.a = a;
+	return (color);
+}
+
+void			ft_draw(t_scene *scn)
+{
 	double 	x;
 	double 	y;
 
 	x = 0;
-	while (x < image_x)
+	while (x < SIZE_W)
 	{
 		y = 0;
-	   	while (y < image_y)
+	   	while (y < SIZE_H)
 	   	{
-	        double c_r = x / zoom + x1;
-	        double c_i = y / zoom + y1;
+	        double c_r = x / scn->f->zoom + scn->f->x1;
+	        double c_i = y / scn->f->zoom + scn->f->y1;
 	        double z_r = 0;
 	        double z_i = 0;
 	        double i = 0;
 
-	        while (z_r * z_r + z_i * z_i < 4 && i < ite_max)
+	        while (z_r * z_r + z_i * z_i < 4 && i < scn->f->ite_max)
 	        {
 	            double tmp = z_r;
 	            z_r = z_r * z_r - z_i * z_i + c_r;
 	            z_i = 2 * z_i * tmp + c_i;
 	            i++;
 	        }
-	        if (i == ite_max)
-	            ft_generate_image(scn.obj, x, y, 0x000000);
+	        if (i == scn->f->ite_max)
+	            ft_generate_image(scn->obj, x, y, ft_get_color(0, 0, 0, 0));
 	        else
-	        	ft_generate_image(scn.obj, x, y, i * 255 / ite_max);
+	        	ft_generate_image(scn->obj, x, y, ft_get_color(0, 0, i * 255 / scn->f->ite_max, 0));
 	    	y++;
 	    }
 	    x++;
 	}
-	mlx_put_image_to_window(scn.mlx, scn.win, scn.obj, SIZE_W / 2, SIZE_H / 2);
+	mlx_put_image_to_window(scn->mlx, scn->win, scn->obj->img, 0, 0);
 }

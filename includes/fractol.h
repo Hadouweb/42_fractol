@@ -21,16 +21,35 @@ typedef struct		s_img
 	char			*data;
 }					t_img;
 
+typedef struct		s_color
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
+}					t_color;
+
+typedef struct 		s_fractal
+{
+	int 			zoom;
+	int 			ite_max;
+	double 			x1;
+	double 			y1;
+	double 			x2;
+	double 			y2;
+	double 			image_x;
+	double 			image_y;
+}					t_fractal;
+
 typedef struct		s_scene
 {
 	void			*mlx;
 	void			*win;
 	t_img			*obj;
-	int 			zoom;
-	int 			ite_max;
+	t_fractal		*f;
 }					t_scene;
 
-void			ft_draw(t_scene scn);
+void			ft_draw(t_scene *scn);
 int				ft_event(int keycode, t_scene *scn);
 int				ft_event_mouse(int button, int x, int y, t_scene *scn);
 

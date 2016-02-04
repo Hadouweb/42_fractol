@@ -26,6 +26,22 @@ static t_img	*ft_get_img_info(t_scene *scn, int width, int height)
 	return (obj);
 }
 
+t_fractal		*ft_init_mandelbrot(void)
+{
+	t_fractal 	*f;
+
+	f = (t_fractal*)ft_memalloc(sizeof(t_fractal));
+	f->zoom = 100;
+	f->ite_max = 50;
+	f->x1 = -2.1;
+	f->x2 = 0.6;
+	f->y1 = -1.2;
+	f->y2 = 1.2;
+	f->image_x = (f->x2 - f->x1) * f->zoom;
+	f->image_y = (f->y2 - f->y1) * f->zoom;
+	return (f);
+}
+
 void			ft_init(void)
 {
 	t_scene	scn;
@@ -33,10 +49,9 @@ void			ft_init(void)
 	scn.mlx = mlx_init();
 	scn.win = mlx_new_window(scn.mlx, SIZE_W, SIZE_H, "FRACTOL");
 	scn.obj = ft_get_img_info(&scn, SIZE_W, SIZE_H);
-	scn.zoom = 100;
-	scn.ite_max = 50;
+	scn.f = ft_init_mandelbrot();
 
-	ft_draw(scn);
+	ft_draw(&scn);
 	mlx_hook(scn.win, 4, 1L<<6, ft_event_mouse, &scn);
 	mlx_key_hook(scn.win, ft_event, &scn);
 
