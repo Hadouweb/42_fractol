@@ -33,8 +33,11 @@ void			ft_init(void)
 	scn.mlx = mlx_init();
 	scn.win = mlx_new_window(scn.mlx, SIZE_W, SIZE_H, "FRACTOL");
 	scn.obj = ft_get_img_info(&scn, SIZE_W, SIZE_H);
+	scn.zoom = 100;
+	scn.ite_max = 50;
 
 	ft_draw(scn);
+	mlx_hook(scn.win, 4, 1L<<6, ft_event_mouse, &scn);
 	mlx_key_hook(scn.win, ft_event, &scn);
 
 	mlx_loop(scn.mlx);
