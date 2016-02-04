@@ -26,22 +26,21 @@ int		ft_event_mouse(int button, int x, int y, t_scene *scn)
 		;
 	if (button == 5)
 	{
-		scn->f->x1 -= x / SIZE_W;
-		scn->f->x2 += x / SIZE_W;
-		scn->f->y1 -= y / SIZE_H;
-		scn->f->y2 += y / SIZE_H;
-		scn->f->zoom += h;
-		scn->f->ite_max += h;
-				printf("%f\n", scn->f->x1);
+		scn->f->x1 += (((double)x - SIZE_H / 2) / (SIZE_W / 2)) / scn->f->zoom * 10;
+		scn->f->x2 += (((double)x - SIZE_H / 2) / (SIZE_W / 2)) / scn->f->zoom * 10;
+		scn->f->y1 += (((double)y - SIZE_W / 2) / (SIZE_H / 2)) / scn->f->zoom * 10;
+		scn->f->y2 += (((double)y - SIZE_W / 2) / (SIZE_H / 2)) / scn->f->zoom * 10;
+		scn->f->zoom *= 1.1;
+		//scn->f->ite_max += h;
+		printf("%f\n", scn->f->x1);
 	}
 	else if (button == 4)
 	{
-		scn->f->x1 += x / SIZE_W;
-		scn->f->x2 -= x / SIZE_W;
-		scn->f->y1 += y / SIZE_H;
-		scn->f->y2 -= y / SIZE_H;
-		scn->f->zoom -= h;
-		scn->f->ite_max -= h;
+		scn->f->zoom /= 1.1;
+		scn->f->x1 += (((double)x - SIZE_H / 2) / SIZE_W / 2) / scn->f->zoom * 10;
+		scn->f->x2 += (((double)x - SIZE_H / 2) / SIZE_W / 2) / scn->f->zoom * 10;
+		scn->f->y1 += (((double)y - SIZE_W / 2) / SIZE_H / 2) / scn->f->zoom * 10;
+		scn->f->y2 += (((double)y - SIZE_W / 2) / SIZE_H / 2) / scn->f->zoom * 10;
 	}
 	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
 	ft_draw(scn);
