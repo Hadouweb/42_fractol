@@ -31,7 +31,7 @@ typedef struct		s_color
 
 typedef struct 		s_fractal
 {
-	int 			zoom;
+	double 			zoom;
 	int 			ite_max;
 	double 			x1;
 	double 			y1;
