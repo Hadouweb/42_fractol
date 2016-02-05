@@ -47,7 +47,7 @@ void			ft_draw(t_scene *scn)
 	            i++;
 	        }
 	        if (i == scn->f->ite_max)
-	            ft_generate_image(scn->obj, x, y, ft_get_color(0, 0, 0, 0));
+	            ft_generate_image(scn->obj, x, y, ft_get_color(0, 255, 0, 0));
 	        else
 	        	ft_generate_image(scn->obj, x, y, ft_get_color(0, 0, i * 255 / scn->f->ite_max, 0));
 	    	y++;
