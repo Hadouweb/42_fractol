@@ -22,35 +22,47 @@ t_color		ft_get_color(unsigned char r, unsigned char g,
 	return (color);
 }
 
+int 			ft_calc_mandelbrot(t_scene *scn, int x, int y, int ite)
+{
+	double 	z_r;
+    double 	z_i;
+    double 	c_r;
+    double 	c_i;
+    double	tmp;
+
+    z_r = 0;
+    z_i = 0;
+    c_r = x / scn->f->zoom + scn->f->x1;
+    c_i = y / scn->f->zoom + scn->f->y1;
+    while (z_r * z_r + z_i * z_i < 4 && ite < scn->f->ite_max)
+    {
+        tmp = z_r;
+        z_r = z_r * z_r - z_i * z_i + c_r;
+        z_i = 2 * z_i * tmp + c_i;
+        ite++;
+    }
+    return (ite);
+}
+
 void			ft_draw(t_scene *scn)
 {
-	double 	x;
-	double 	y;
+	int 	x;
+	int 	y;
+	int 	i;
 
+	i = 0;
 	x = 0;
 	while (x < SIZE_W)
 	{
 		y = 0;
 	   	while (y < SIZE_H)
 	   	{
-	        double c_r = x / scn->f->zoom + scn->f->x1;
-	        double c_i = y / scn->f->zoom + scn->f->y1;
-	        double z_r = 0;
-	        double z_i = 0;
-	        double i = 0;
-
-	        while (z_r * z_r + z_i * z_i < 4 && i < scn->f->ite_max)
-	        {
-	            double tmp = z_r;
-	            z_r = z_r * z_r - z_i * z_i + c_r;
-	            z_i = 2 * z_i * tmp + c_i;
-	            i++;
-	        }
-	        if (i == scn->f->ite_max)
-	            ft_generate_image(scn->obj, x, y, ft_get_color(0, 255, 0, 0));
-	        else
-	        	ft_generate_image(scn->obj, x, y, ft_get_color(0, 0, i * 255 / scn->f->ite_max, 0));
-	    	y++;
+	   		i = ft_calc_mandelbrot(scn, x, y, 0);
+	   		if (i == scn->f->ite_max)
+		        ft_generate_image(scn->obj, x, y, ft_get_color(0, 255, 0, 0));
+		    else
+		    	ft_generate_image(scn->obj, x, y, ft_get_color(0, 0, i * 255 / scn->f->ite_max, 0));
+			    	y++;
 	    }
 	    x++;
 	}

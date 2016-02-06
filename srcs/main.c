@@ -51,7 +51,13 @@ void			ft_init(void)
 	scn.obj = ft_get_img_info(&scn, SIZE_W, SIZE_H);
 	scn.f = ft_init_mandelbrot();
 
+clock_t start = clock(), diff;
 	ft_draw(&scn);
+diff = clock() - start;
+
+int msec = diff * 1000 / CLOCKS_PER_SEC;
+printf("\n_____Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
+
 	mlx_hook(scn.win, 4, 1L<<6, ft_event_mouse, &scn);
 	mlx_key_hook(scn.win, ft_event, &scn);
 
