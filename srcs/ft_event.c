@@ -19,27 +19,23 @@ int		ft_event_mouse(int button, int x, int y, t_scene *scn)
 	float 	h;
 
 	h = 1.1;
-	if (button == 5)
+	if (button == 5 && scn->f->zoom < 1073379187320315)
 	{
-		printf("before %.20f\n", scn->f->x1);
 		scn->f->zoom *= h;
  		scn->f->x1 += (float)x / scn->f->zoom / 10;
  		scn->f->x2 += (float)x / scn->f->zoom / 10;
  		scn->f->y1 += (float)y / scn->f->zoom / 10;
  		scn->f->y2 += (float)y / scn->f->zoom / 10;
 		scn->f->ite_max += 1;
-		printf("after %.20f %d %f\n", scn->f->x1, scn->f->ite_max, scn->f->zoom);
 	}
 	else if (button == 4 && scn->f->zoom > 10)
 	{
-		printf("- before %.20f\n", scn->f->x1);
 		scn->f->zoom /= h;
  		scn->f->x1 -= (float)x / scn->f->zoom / 10;
  		scn->f->x2 -= (float)x / scn->f->zoom / 10;
  		scn->f->y1 -= (float)y / scn->f->zoom / 10;
  		scn->f->y2 -= (float)y / scn->f->zoom / 10;
 		scn->f->ite_max -= 1;
-		printf("- after %.20f\n", scn->f->x1);
 	}
 	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
 	ft_draw(scn);

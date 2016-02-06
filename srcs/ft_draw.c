@@ -32,8 +32,8 @@ int 			ft_calc_mandelbrot(t_scene *scn, int x, int y, int ite)
 
     zr = 0;
     zi = 0;
-    cr = x / scn->f->zoom + scn->f->x1;
-    ci = y / scn->f->zoom + scn->f->y1;
+    cr = (double)x / scn->f->zoom + scn->f->x1;
+    ci = (double)y / scn->f->zoom + scn->f->y1;
     while (zr * zr + zi * zi < 4 && ite < scn->f->ite_max)
     {
         tmp = zr;
@@ -58,6 +58,7 @@ void			ft_draw(t_scene *scn)
 	   	while (y < SIZE_H)
 	   	{
 	   		i = ft_calc_mandelbrot(scn, x, y, 0);
+	   		//printf("___%d\n", i);
 	   		if (i == scn->f->ite_max)
 		        ft_generate_image(scn->obj, x, y, ft_get_color(0, 255, 0, 0));
 		    else
