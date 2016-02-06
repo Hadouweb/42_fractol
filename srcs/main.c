@@ -37,8 +37,6 @@ t_fractal		*ft_init_mandelbrot(void)
 	f->x2 = 0.6;
 	f->y1 = -2;
 	f->y2 = 1.2;
-	f->image_x = (f->x2 - f->x1) * f->zoom;
-	f->image_y = (f->y2 - f->y1) * f->zoom;
 	return (f);
 }
 

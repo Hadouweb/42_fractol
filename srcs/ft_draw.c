@@ -24,21 +24,21 @@ t_color		ft_get_color(unsigned char r, unsigned char g,
 
 int 			ft_calc_mandelbrot(t_scene *scn, int x, int y, int ite)
 {
-	double 	z_r;
-    double 	z_i;
-    double 	c_r;
-    double 	c_i;
+	double 	zr;
+    double 	zi;
+    double 	cr;
+    double 	ci;
     double	tmp;
 
-    z_r = 0;
-    z_i = 0;
-    c_r = x / scn->f->zoom + scn->f->x1;
-    c_i = y / scn->f->zoom + scn->f->y1;
-    while (z_r * z_r + z_i * z_i < 4 && ite < scn->f->ite_max)
+    zr = 0;
+    zi = 0;
+    cr = x / scn->f->zoom + scn->f->x1;
+    ci = y / scn->f->zoom + scn->f->y1;
+    while (zr * zr + zi * zi < 4 && ite < scn->f->ite_max)
     {
-        tmp = z_r;
-        z_r = z_r * z_r - z_i * z_i + c_r;
-        z_i = 2 * z_i * tmp + c_i;
+        tmp = zr;
+        zr = zr * zr - zi * zi + cr;
+        zi = 2 * zi * tmp + ci;
         ite++;
     }
     return (ite);
@@ -62,7 +62,7 @@ void			ft_draw(t_scene *scn)
 		        ft_generate_image(scn->obj, x, y, ft_get_color(0, 255, 0, 0));
 		    else
 		    	ft_generate_image(scn->obj, x, y, ft_get_color(0, 0, i * 255 / scn->f->ite_max, 0));
-			    	y++;
+			y++;
 	    }
 	    x++;
 	}

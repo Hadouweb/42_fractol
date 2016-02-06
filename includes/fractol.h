@@ -38,8 +38,6 @@ typedef struct 		s_fractal
 	double 			y1;
 	double 			x2;
 	double 			y2;
-	double 			image_x;
-	double 			image_y;
 }					t_fractal;
 
 typedef struct		s_scene
