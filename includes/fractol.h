@@ -12,6 +12,7 @@
 # define KEY_ESC 53
 # define ITE_UP 8
 # define ITE_DOWN 9
+# define KEY_CS_RAND 15
 
 typedef struct		s_img
 {
@@ -46,10 +47,14 @@ typedef struct		s_scene
 	void			*win;
 	t_img			*obj;
 	t_fractal		*f;
+	t_color 		cs[5];
 }					t_scene;
 
 void			ft_draw(t_scene *scn);
 int				ft_event(int keycode, t_scene *scn);
 int				ft_event_mouse(int button, int x, int y, t_scene *scn);
+
+t_color			ft_get_color(unsigned char r, unsigned char g,
+					unsigned char b, unsigned char a);
 
 #endif

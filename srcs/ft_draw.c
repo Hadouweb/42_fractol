@@ -44,20 +44,20 @@ int 			ft_calc_mandelbrot(t_scene *scn, int x, int y, int ite)
     return (ite);
 }
 
-t_color			ft_choice_color(t_scene *scn, int i)
+t_color			ft_choice_color(t_color cs[5], int i, int m)
 {
 	t_color	color;
-	int 	nbr;
 
-	nbr = scn->f->ite_max / 5;
-	if (i == scn->f->ite_max)
-		color = ft_get_color(0, 0, 100, 0);
-	else if (i < nbr)
-		color = ft_get_color(i * 255 / nbr, i * 255 / nbr, i * 255 / nbr, 0);
-	else if (i < nbr * 2)
-		color = ft_get_color(i * 255 / nbr, i * 200 / nbr, i * 255 / nbr, 0);
-	else
-		color = ft_get_color(i * 100 / nbr, i * 100 / nbr, i * 100 / nbr, 0);
+	if (i == m)
+		color = cs[0];
+	else if (i * 4 < m)
+		color = ft_get_color(cs[1].r * i * 4 / m, cs[1].g, cs[1].b, 0);
+	else if (i * 3 < m)
+		color = ft_get_color(cs[2].r * i * 3 / m, cs[2].g, cs[2].b, 0);
+	else if (i * 2 < m)
+		color = ft_get_color(cs[3].r * i * 2 / m, cs[3].g * i * 2 / m, cs[3].b * i * 2 / m, 0);
+	else if (i < m)
+		color = ft_get_color(cs[4].r * i / m, cs[4].g * i / m, cs[4].b * i / m, 0);		
 	return (color);
 }
 
@@ -76,7 +76,7 @@ void			ft_draw(t_scene *scn)
 	   	{
 	   		i = ft_calc_mandelbrot(scn, x, y, 0);
 	   		//printf("___%d\n", i);
-		    ft_generate_image(scn->obj, x, y, ft_choice_color(scn, i));
+		    ft_generate_image(scn->obj, x, y, ft_choice_color(scn->cs, i, scn->f->ite_max));
 			y++;
 	    }
 	    x++;

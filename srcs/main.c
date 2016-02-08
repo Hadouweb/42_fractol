@@ -40,6 +40,15 @@ t_fractal		*ft_init_mandelbrot(void)
 	return (f);
 }
 
+void			ft_get_colorset(t_scene	*scn)
+{
+	scn->cs[0] = ft_get_color(0, 0, 0, 0);
+	scn->cs[1] = ft_get_color(120, 0, 0, 0);
+	scn->cs[2] = ft_get_color(180, 0, 0, 0);
+	scn->cs[3] = ft_get_color(100, 200, 250, 0);
+	scn->cs[4] = ft_get_color(250, 250, 250, 0);
+}
+
 void			ft_init(void)
 {
 	t_scene	scn;
@@ -48,14 +57,9 @@ void			ft_init(void)
 	scn.win = mlx_new_window(scn.mlx, SIZE_W, SIZE_H, "FRACTOL");
 	scn.obj = ft_get_img_info(&scn, SIZE_W, SIZE_H);
 	scn.f = ft_init_mandelbrot();
+	ft_get_colorset(&scn);
 
-clock_t start = clock(), diff;
 	ft_draw(&scn);
-diff = clock() - start;
-
-int msec = diff * 1000 / CLOCKS_PER_SEC;
-printf("\n_____Time taken %d seconds %d milliseconds\n", msec/1000, msec%1000);
-
 	mlx_hook(scn.win, 4, 1L<<6, ft_event_mouse, &scn);
 	mlx_key_hook(scn.win, ft_event, &scn);
 
