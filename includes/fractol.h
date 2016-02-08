@@ -59,11 +59,17 @@ typedef struct		s_scene
 	int 			pos_y;
 }					t_scene;
 
-void			ft_draw(t_scene *scn);
+t_fractal		*ft_init_mandelbrot(void);
+int 			ft_calc_mandelbrot(t_scene *scn, int x, int y, int ite);
+
+int 			ft_event_repeat(int keycode, t_scene *scn);
+
 int				ft_event(int keycode, t_scene *scn);
 int				ft_event_mouse(int button, int x, int y, t_scene *scn);
+
+void			ft_generate_image(t_img *obj, int x, int y, t_color color);
 t_color			ft_get_color(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
-int 			ft_event_repeat(int keycode, t_scene *scn);
+void			ft_draw(t_scene *scn);
 
 #endif

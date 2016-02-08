@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-int 	ft_event_color(int keycode, t_scene *scn)
+static int 	ft_event_color(int keycode, t_scene *scn)
 {
 	if (keycode == KEY_CS_RAND)
 	{
@@ -13,29 +13,7 @@ int 	ft_event_color(int keycode, t_scene *scn)
 	return (1);
 }
 
-int 	ft_move(int keycode, t_scene *scn)
-{
-	if (keycode == KEY_UP)
-		scn->pos_y -= 10;
-	if (keycode == KEY_DOWN)
-		scn->pos_y += 10;
-	if (keycode == KEY_LEFT)
-		scn->pos_x -= 10;
-	if (keycode == KEY_RIGHT)
-		scn->pos_x += 10;
-
-	return (1);
-}
-
-int 	ft_event_repeat(int keycode, t_scene *scn)
-{
-	ft_move(keycode, scn);
-	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
-	ft_draw(scn);
-	return (1);
-}
-
-int		ft_event(int keycode, t_scene *scn)
+int			ft_event(int keycode, t_scene *scn)
 {
 	printf("%d\n", keycode);
 	if (keycode == KEY_ESC)
@@ -50,7 +28,7 @@ int		ft_event(int keycode, t_scene *scn)
 	return (1);
 }
 
-int		ft_event_mouse(int button, int x, int y, t_scene *scn)
+int			ft_event_mouse(int button, int x, int y, t_scene *scn)
 {
 	float 	h;
 
@@ -71,6 +49,5 @@ int		ft_event_mouse(int button, int x, int y, t_scene *scn)
 	}
 	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
 	ft_draw(scn);
-
 	return (1);
 }
