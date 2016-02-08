@@ -23,6 +23,7 @@ int 	ft_move(int keycode, t_scene *scn)
 		scn->pos_x -= 10;
 	if (keycode == KEY_RIGHT)
 		scn->pos_x += 10;
+
 	return (1);
 }
 
@@ -55,21 +56,17 @@ int		ft_event_mouse(int button, int x, int y, t_scene *scn)
 
 	h = 1.1;
 	if (button == 5 && scn->f->zoom < 1073379187320315)
-	{
-		scn->f->zoom *= h;
- 		scn->f->x1 += (float)x / scn->f->zoom / 10;
- 		scn->f->x2 += (float)x / scn->f->zoom / 10;
- 		scn->f->y1 += (float)y / scn->f->zoom / 10;
- 		scn->f->y2 += (float)y / scn->f->zoom / 10;
+	{	
+ 		scn->f->x1 += ((float)x - scn->pos_x) / scn->f->zoom / 10;
+ 		scn->f->y1 += ((float)y - scn->pos_y) / scn->f->zoom / 10;
 		scn->f->ite_max += 1;
+		scn->f->zoom *= h;
 	}
 	else if (button == 4 && scn->f->zoom > 10)
 	{
+		scn->f->x1 -= ((float)x - scn->pos_x) / scn->f->zoom / 10;
+ 		scn->f->y1 -= ((float)y - scn->pos_y) / scn->f->zoom / 10;
 		scn->f->zoom /= h;
- 		scn->f->x1 -= (float)x / scn->f->zoom / 10;
- 		scn->f->x2 -= (float)x / scn->f->zoom / 10;
- 		scn->f->y1 -= (float)y / scn->f->zoom / 10;
- 		scn->f->y2 -= (float)y / scn->f->zoom / 10;
 		scn->f->ite_max -= 1;
 	}
 	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
