@@ -58,9 +58,12 @@ void			ft_init(void)
 	scn.obj = ft_get_img_info(&scn, SIZE_W, SIZE_H);
 	scn.f = ft_init_mandelbrot();
 	ft_get_colorset(&scn);
+	scn.pos_x = 0;
+	scn.pos_y = 0;
 
 	ft_draw(&scn);
 	mlx_hook(scn.win, 4, 1L<<6, ft_event_mouse, &scn);
+	mlx_hook(scn.win, 2, 3, ft_event_repeat, &scn);
 	mlx_key_hook(scn.win, ft_event, &scn);
 
 	mlx_loop(scn.mlx);

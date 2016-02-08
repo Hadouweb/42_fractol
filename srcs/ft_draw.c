@@ -32,8 +32,8 @@ int 			ft_calc_mandelbrot(t_scene *scn, int x, int y, int ite)
 
     zr = 0;
     zi = 0;
-    cr = (double)x / scn->f->zoom + scn->f->x1;
-    ci = (double)y / scn->f->zoom + scn->f->y1;
+    cr = ((double)x - scn->pos_x) / scn->f->zoom + scn->f->x1;
+    ci = ((double)y - scn->pos_y) / scn->f->zoom + scn->f->y1;
     while (zr * zr + zi * zi < 4 && ite < scn->f->ite_max)
     {
         tmp = zr;
