@@ -42,7 +42,7 @@ static void		ft_init(void)
 	scn.mlx = mlx_init();
 	scn.win = mlx_new_window(scn.mlx, SIZE_W, SIZE_H, "FRACTOL");
 	scn.obj = ft_get_img_info(&scn, SIZE_W, SIZE_H);
-	scn.f = ft_init_mandelbrot();
+	scn.f = ft_init_julia();
 	ft_init_colorset(&scn);
 	scn.pos_x = 0;
 	scn.pos_y = 0;

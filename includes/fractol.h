@@ -44,8 +44,6 @@ typedef struct 		s_fractal
 	int 			ite_max;
 	double 			x1;
 	double 			y1;
-	double 			x2;
-	double 			y2;
 }					t_fractal;
 
 typedef struct		s_scene
@@ -61,6 +59,8 @@ typedef struct		s_scene
 
 t_fractal		*ft_init_mandelbrot(void);
 int 			ft_calc_mandelbrot(t_scene *scn, int x, int y, int ite);
+t_fractal       *ft_init_julia(void);
+int             ft_calc_julia(t_scene *scn, int x, int y, int ite);
 
 int 			ft_event_repeat(int keycode, t_scene *scn);
 
