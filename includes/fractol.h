@@ -5,6 +5,7 @@
 # include "libft.h" 
 # include <stdio.h>
 # include <time.h>
+# include <math.h>
 
 # define SIZE_H 500
 # define SIZE_W 500

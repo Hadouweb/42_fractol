@@ -44,8 +44,8 @@ static void		ft_init(void)
 	scn.obj = ft_get_img_info(&scn, SIZE_W, SIZE_H);
 	scn.f = ft_init_julia();
 	ft_init_colorset(&scn);
-	scn.pos_x = 0;
-	scn.pos_y = 0;
+	scn.pos_x = SIZE_W / 2 - fabs(scn.f->zoom * scn.f->x1);
+	scn.pos_y = SIZE_H / 2 - fabs(scn.f->zoom * scn.f->y1);;
 
 	ft_draw(&scn);
 	mlx_hook(scn.win, 4, 1L<<6, ft_event_mouse, &scn);
