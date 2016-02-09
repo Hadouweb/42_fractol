@@ -44,6 +44,7 @@ typedef struct 		s_fractal
 	int 			ite_max;
 	double 			x1;
 	double 			y1;
+	double 			form;
 }					t_fractal;
 
 typedef struct		s_scene
@@ -66,6 +67,7 @@ int 			ft_event_repeat(int keycode, t_scene *scn);
 
 int				ft_event(int keycode, t_scene *scn);
 int				ft_event_mouse(int button, int x, int y, t_scene *scn);
+int 			ft_event_julia(int x, int y, t_scene *scn);
 
 void			ft_generate_image(t_img *obj, int x, int y, t_color color);
 t_color			ft_get_color(unsigned char r, unsigned char g,
