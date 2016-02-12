@@ -35,19 +35,27 @@ static void		ft_init_colorset(t_scene *scn)
 	scn->cs[4] = ft_get_color(250, 250, 250, 0);
 }
 
+void			ft_init_name(t_scene *scn)
+{
+	scn->init_fractal[0] = ft_init_mandelbrot;
+	scn->init_fractal[1] = ft_init_julia;
+	scn->calc[0] = ft_calc_mandelbrot;
+	scn->calc[1] = ft_calc_julia;
+}
+
 static void		ft_init(t_scene *scn)
 {
 	scn->mlx = mlx_init();
 	scn->win = mlx_new_window(scn->mlx, SIZE_W, SIZE_H, "FRACTOL");
 	scn->obj = ft_get_img_info(scn, SIZE_W, SIZE_H);
-	scn->f = ft_init_mandelbrot();
+	scn->f = scn->init_fractal[scn->id_f]();
 	ft_init_colorset(scn);
 	scn->pos_x = SIZE_W / 2 - fabs(scn->f->zoom * scn->f->x1);
 	scn->pos_y = SIZE_H / 2 - fabs(scn->f->zoom * scn->f->y1);;
 
 	ft_draw(scn);
 	mlx_hook(scn->win, 4, 1L<<6, ft_event_mouse, scn);
-	if (scn->fractal == 2)
+	if (scn->id_f == 2)
 		mlx_hook(scn->win, 6, 1L<<6, ft_event_julia, scn);
 	mlx_hook(scn->win, 2, 3, ft_event_repeat, scn);
 	mlx_key_hook(scn->win, ft_event, scn);
@@ -71,6 +79,7 @@ int				main(int ac, char **av)
 			i++;
 		}
 	}
+	ft_init_name(&scn);
 	ft_init(&scn);
 	return (0);
 }

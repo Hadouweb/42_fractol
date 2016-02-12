@@ -31,7 +31,6 @@ int			ft_event(int keycode, t_scene *scn)
 int 		ft_event_julia(int x, int y, t_scene *scn)
 {
 	scn->f->form = (double)(x * y) / (SIZE_W * SIZE_H) * 2;
-	printf("%f\n", scn->f->form);
 	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
 	ft_draw(scn);
 	return (1);

@@ -62,7 +62,9 @@ typedef struct		s_scene
 	t_color 		cs[5];
 	int 			pos_x;
 	int 			pos_y;
-	char			fractal;
+	int				id_f;
+	t_fractal 		*(*init_fractal[NB_FRACTAL])(void);
+	int 			(*calc[NB_FRACTAL])(struct s_scene *scn, int x, int y, int ite);
 }					t_scene;
 
 t_fractal		*ft_init_mandelbrot(void);

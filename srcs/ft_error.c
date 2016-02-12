@@ -19,7 +19,7 @@ void	ft_check_name(char *name, t_scene *scn)
 		if (ft_strcmp(name, n[i]) == 0)
 		{
 			find = 1;
-			scn->fractal = i + 1;
+			scn->id_f = i;
 		}
 		i++;
 	}

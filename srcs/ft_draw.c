@@ -52,7 +52,7 @@ void			ft_draw(t_scene *scn)
 		y = 0;
 	   	while (y < SIZE_H)
 	   	{
-	   		i = ft_calc_mandelbrot(scn, x, y, 0);
+	   		i = scn->calc[scn->id_f](scn, x, y, 0);
 		    ft_generate_image(scn->obj, x, y, ft_choice_color(scn->cs, i, scn->f->ite_max));
 			y++;
 	    }
