@@ -35,29 +35,42 @@ static void		ft_init_colorset(t_scene *scn)
 	scn->cs[4] = ft_get_color(250, 250, 250, 0);
 }
 
-static void		ft_init(void)
+static void		ft_init(t_scene *scn)
 {
-	t_scene	scn;
+	scn->mlx = mlx_init();
+	scn->win = mlx_new_window(scn->mlx, SIZE_W, SIZE_H, "FRACTOL");
+	scn->obj = ft_get_img_info(scn, SIZE_W, SIZE_H);
+	scn->f = ft_init_mandelbrot();
+	ft_init_colorset(scn);
+	scn->pos_x = SIZE_W / 2 - fabs(scn->f->zoom * scn->f->x1);
+	scn->pos_y = SIZE_H / 2 - fabs(scn->f->zoom * scn->f->y1);;
 
-	scn.mlx = mlx_init();
-	scn.win = mlx_new_window(scn.mlx, SIZE_W, SIZE_H, "FRACTOL");
-	scn.obj = ft_get_img_info(&scn, SIZE_W, SIZE_H);
-	scn.f = ft_init_julia();
-	ft_init_colorset(&scn);
-	scn.pos_x = SIZE_W / 2 - fabs(scn.f->zoom * scn.f->x1);
-	scn.pos_y = SIZE_H / 2 - fabs(scn.f->zoom * scn.f->y1);;
+	ft_draw(scn);
+	mlx_hook(scn->win, 4, 1L<<6, ft_event_mouse, scn);
+	if (scn->fractal == 2)
+		mlx_hook(scn->win, 6, 1L<<6, ft_event_julia, scn);
+	mlx_hook(scn->win, 2, 3, ft_event_repeat, scn);
+	mlx_key_hook(scn->win, ft_event, scn);
 
-	ft_draw(&scn);
-	mlx_hook(scn.win, 4, 1L<<6, ft_event_mouse, &scn);
-	mlx_hook(scn.win, 6, 1L<<6, ft_event_julia, &scn);
-	mlx_hook(scn.win, 2, 3, ft_event_repeat, &scn);
-	mlx_key_hook(scn.win, ft_event, &scn);
-
-	mlx_loop(scn.mlx);
+	mlx_loop(scn->mlx);
 }
 
-int				main(void)
+int				main(int ac, char **av)
 {
-	ft_init();
+	int 	i;
+	t_scene	scn;
+
+	i = 1;
+	if (ac < 2)
+		ft_error();
+	else
+	{
+		while (i < ac)
+		{
+			ft_check_name(av[i], &scn);
+			i++;
+		}
+	}
+	ft_init(&scn);
 	return (0);
 }

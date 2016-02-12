@@ -7,8 +7,8 @@
 # include <time.h>
 # include <math.h>
 
-# define SIZE_H 500
-# define SIZE_W 500
+# define SIZE_H 1000
+# define SIZE_W 1000
 
 # define KEY_ESC 53
 
@@ -17,10 +17,15 @@
 
 # define KEY_CS_RAND 15
 
+# define KEY_ZOOM 4
+# define KEY_DEZOOM 5
+
 # define KEY_UP 126
 # define KEY_DOWN 125
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+
+# define NB_FRACTAL 2
 
 typedef struct		s_img
 {
@@ -57,6 +62,7 @@ typedef struct		s_scene
 	t_color 		cs[5];
 	int 			pos_x;
 	int 			pos_y;
+	char			fractal;
 }					t_scene;
 
 t_fractal		*ft_init_mandelbrot(void);
@@ -74,5 +80,8 @@ void			ft_generate_image(t_img *obj, int x, int y, t_color color);
 t_color			ft_get_color(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
 void			ft_draw(t_scene *scn);
+
+void			ft_error(void);
+void			ft_check_name(char *name, t_scene *scn);
 
 #endif

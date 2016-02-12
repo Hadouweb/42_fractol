@@ -5,7 +5,7 @@ t_fractal		*ft_init_mandelbrot(void)
 	t_fractal 	*f;
 
 	f = (t_fractal*)ft_memalloc(sizeof(t_fractal));
-	f->zoom = 100;
+	f->zoom = 200;
 	f->ite_max = 50;
 	f->x1 = -2.1;
 	f->y1 = -2;
@@ -18,7 +18,7 @@ t_fractal       *ft_init_julia(void)
     t_fractal   *f;
 
     f = (t_fractal*)ft_memalloc(sizeof(t_fractal));
-    f->zoom = 100;
+    f->zoom = 200;
     f->ite_max = 50;
     f->x1 = -1;
     f->y1 = -1.2;
