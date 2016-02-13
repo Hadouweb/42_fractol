@@ -56,7 +56,7 @@ static void		ft_init(t_scene *scn)
 
 	ft_draw(scn);
 	mlx_hook(scn->win, 4, 1L<<6, ft_event_mouse, scn);
-	if (scn->id_f == 2)
+	if (scn->id_f == 1)
 		mlx_hook(scn->win, 6, 1L<<6, ft_event_julia, scn);
 	mlx_hook(scn->win, 2, 3, ft_event_repeat, scn);
 	mlx_key_hook(scn->win, ft_event, scn);
