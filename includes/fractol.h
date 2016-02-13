@@ -12,8 +12,10 @@
 
 # define KEY_ESC 53
 
-# define ITE_UP 8
-# define ITE_DOWN 9
+# define KEY_ITE_UP 8
+# define KEY_ITE_DOWN 9
+
+# define KEY_CMD 259
 
 # define KEY_CS_RAND 15
 
@@ -63,6 +65,7 @@ typedef struct		s_scene
 	int 			pos_x;
 	int 			pos_y;
 	int				id_f;
+	int 			cmd;
 	t_fractal 		*(*init_fractal[NB_FRACTAL])(void);
 	int 			(*calc[NB_FRACTAL])(struct s_scene *scn, int x, int y, int ite);
 }					t_scene;

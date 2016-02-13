@@ -51,7 +51,8 @@ static void		ft_init(t_scene *scn)
 	scn->f = scn->init_fractal[scn->id_f]();
 	ft_init_colorset(scn);
 	scn->pos_x = SIZE_W / 2 - fabs(scn->f->zoom * scn->f->x1);
-	scn->pos_y = SIZE_H / 2 - fabs(scn->f->zoom * scn->f->y1);;
+	scn->pos_y = SIZE_H / 2 - fabs(scn->f->zoom * scn->f->y1);
+	scn->cmd = 0;
 
 	ft_draw(scn);
 	mlx_hook(scn->win, 4, 1L<<6, ft_event_mouse, scn);
