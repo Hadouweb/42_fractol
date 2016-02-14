@@ -15,22 +15,27 @@
 char		*ft_get_name(t_app *app, int id)
 {
 	char	*name;
+	char	*tmp_name;
 	char	*tmp_id;
 	char	*tmp_id2;
-	char	*tmp_id3;
+	char	*itoa_id;
 
 	if ((name = ft_strdup(app->n[id])) == NULL)
 		ft_error("Malloc name\n");
 	if (name[0])
 	{
 		name[0] -= 32;
+		tmp_name = name;
+		itoa_id = ft_itoa(id);
 		tmp_id = ft_strdup(" [");
-		tmp_id2 = ft_strjoin(tmp_id, ft_itoa(id));
+		tmp_id2 = ft_strjoin(tmp_id, itoa_id);
 		ft_strdel(&tmp_id);
-		tmp_id3 = ft_strjoin(tmp_id2, "]");
+		ft_strdel(&itoa_id);
+		tmp_id = ft_strjoin(tmp_id2, "]");
 		ft_strdel(&tmp_id2);
-		name = ft_strjoin(name, tmp_id3);
-		ft_strdel(&tmp_id3);
+		name = ft_strjoin(tmp_name, tmp_id);
+		ft_strdel(&tmp_id);
+		ft_strdel(&tmp_name);
 	}
 	return (name);
 }

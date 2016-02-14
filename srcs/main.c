@@ -32,5 +32,6 @@ int		main(int ac, char **av)
 		}
 	}
 	ft_init_app(&app);
+	sleep(10);
 	return (0);
 }

@@ -36,7 +36,7 @@ char		*ft_itoa(long long n)
 	i = ft_intlen(n);
 	sign = (n < 0) ? -1 : 1;
 	if (n == 0)
-		return ("0");
+		return (ft_strdup("0"));
 	if ((str = (char *)malloc(i * sizeof(char) + 1)) == NULL)
 		return (NULL);
 	if (n < 0)
