@@ -9,7 +9,7 @@ void	ft_error(void)
 void	ft_check_name(char *name, t_scene *scn)
 {
 	int			i;
-	const char 	*n[NB_FRACTAL] = {"mandelbrot", "julia"};
+	const char 	*n[NB_FRACTAL] = {"mandelbrot", "julia", "burningship"};
 	int			find;
 
 	i = 0;
