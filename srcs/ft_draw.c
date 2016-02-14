@@ -24,7 +24,6 @@ void			ft_generate_image(t_img *obj, int x, int y, t_color color)
 	obj->data[y * obj->sizeline + x * obj->bpp / 8] = color.r;
 	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 1] = color.g;
 	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 2] = color.b;
-	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 3] = color.a;
 }
 
 t_color			ft_get_color(unsigned char r, unsigned char g,

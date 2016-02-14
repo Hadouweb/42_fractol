@@ -7,8 +7,8 @@
 # include <time.h>
 # include <math.h>
 
-# define SIZE_H 1000
-# define SIZE_W 1000
+# define SIZE_H 500
+# define SIZE_W 500
 
 # define KEY_ESC 53
 
@@ -68,17 +68,17 @@ typedef struct		s_scene
 	int 			cmd;
 	int 			(*calc)(struct s_scene *scn, int x, int y, int ite);
 	void			*mlx;
-	struct s_app	*app;
 	int 			id;
+	struct s_app	*app;
 }					t_scene;
 
 typedef struct 		s_app
 {
-	t_scene			scn[NB_FRACTAL];
+	t_scene			*scn[NB_FRACTAL];
 	void			*mlx;
 	int 			(*calc[NB_FRACTAL])(struct s_scene *scn, int x, int y, int ite);
 	int 			id_win[NB_FRACTAL];
-	int 			current;
+	int 			c;
 }					t_app;
 
 t_fractal		*ft_init_fractal(void);
@@ -90,7 +90,7 @@ int             ft_calc_newton(t_scene *scn, int x, int y, int ite);
 
 int 			ft_event_repeat(int keycode, t_scene *scn);
 
-int				ft_event(int keycode, t_scene *scn);
+int				ft_event(int keycode, t_app *app);
 int				ft_event_mouse(int button, int x, int y, t_scene *scn);
 int 			ft_event_julia(int x, int y, t_scene *scn);
 

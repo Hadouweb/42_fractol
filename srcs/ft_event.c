@@ -20,41 +20,60 @@ void		ft_destroy_win(t_app *app)
 
 	i = 0;
 	find = 0;
-	app->id_win[0] = 0;
+	while (i < NB_FRACTAL)
+	{
+		printf("__%d\n", app->id_win[i]);
+		i++;
+	}
+	app->id_win[app->c] = 0;
+	i = 0;
+	printf("_appc %d\n", app->c);
+	printf("\n");
 	while (i < NB_FRACTAL)
 	{
 		if (app->id_win[i])
 			find = 1;
+		printf("__%d\n", app->id_win[i]);
 		i++;
 	}
+	printf("_CURRENT %d\n", app->c);
 	if (!find)
 		exit(1);
 }
 
-int			ft_event(int keycode, t_scene *scn)
+int			ft_event(int keycode, t_app *app)
 {
 	printf("%d\n", keycode);
 	if (keycode == KEY_ESC)
 	{
-		mlx_destroy_window(scn->mlx, scn->win);
-		printf("DESTROY : %d\n", scn->id);
-		ft_destroy_win(scn->app);
+		printf("DESTROY : %d\n", app->scn[app->c]->id);
+		printf("_appc2 %d\n", app->c);
+		ft_destroy_win(app);
+		mlx_destroy_window(app->mlx, app->scn[app->c]->win);
+		int i = 0;
+		while (i < NB_FRACTAL)
+		{
+			if (app->id_win[i])
+				app->c = i;
+			i++;
+		}
+		printf("_appc3 %d\n", app->c);
 		return (1);
 	}
 	else if (keycode == KEY_ITE_UP)
-		scn->f->ite_max += 5;
+		app->scn[app->c]->f->ite_max += 5;
 	else if (keycode == KEY_ITE_DOWN)
-		scn->f->ite_max -= 5;
+		app->scn[app->c]->f->ite_max -= 5;
 	else if (keycode == KEY_CMD)
 	{
-		if (scn->cmd)
-			scn->cmd = 0;
+		if (app->scn[app->c]->cmd)
+			app->scn[app->c]->cmd = 0;
 		else
-			scn->cmd = 1;
+			app->scn[app->c]->cmd = 1;
 	}
-	ft_event_color(keycode, scn);
-	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
-	ft_draw(scn);
+	ft_event_color(keycode, app->scn[app->c]);
+	ft_bzero(app->scn[app->c]->obj->data, SIZE_W * SIZE_H * 4);
+	ft_draw(app->scn[app->c]);
 	return (1);
 }
 

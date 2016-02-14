@@ -46,30 +46,35 @@ void			ft_init_name(t_app *app)
 
 int 			ft_expose(t_scene *scn)
 {
-	scn->app->current = scn->id;
-	printf("CURRENT %d\n", scn->app->current);
-	return (1);
+	int 	i;
+
+	i = 0;
+	scn->app->c = scn->id;
+	printf("CURRENT %d %p\n", scn->app->c, scn->app);
+	return (scn->id);
 }
 
-static void		ft_init_scene(t_scene *scn, int id)
+static void		ft_init_scene(t_app *app, int id)
 {
-	scn->win = mlx_new_window(scn->mlx, SIZE_W, SIZE_H, ft_itoa(id));
-	scn->obj = ft_get_img_info(scn->mlx, SIZE_W, SIZE_H);
-	scn->f = ft_init_fractal();
-	scn->id = id;
-	ft_init_colorset(scn);
-	scn->pos_x = SIZE_W / 2 - fabs(scn->f->zoom * scn->f->x1);
-	scn->pos_y = SIZE_H / 2 - fabs(scn->f->zoom * scn->f->y1);
-	scn->cmd = 0;
+	app->scn[id]->app = app;
+	app->scn[id]->mlx = app->mlx;
+	app->scn[id]->calc = app->calc[id];
+	app->scn[id]->win = mlx_new_window(app->scn[id]->mlx, SIZE_W, SIZE_H, ft_itoa(id));
+	app->scn[id]->obj = ft_get_img_info(app->scn[id]->mlx, SIZE_W, SIZE_H);
+	app->scn[id]->f = ft_init_fractal();
+	app->scn[id]->id = id;
+	ft_init_colorset(app->scn[id]);
+	app->scn[id]->pos_x = SIZE_W / 2 - fabs(app->scn[id]->f->zoom * app->scn[id]->f->x1);
+	app->scn[id]->pos_y = SIZE_H / 2 - fabs(app->scn[id]->f->zoom * app->scn[id]->f->y1);
+	app->scn[id]->cmd = 0;
 
-	ft_draw(scn);
-	mlx_hook(scn->win, 4, 1L<<6, ft_event_mouse, scn);
-	if (scn->id_f == 1)
-		mlx_hook(scn->win, 6, 1L<<6, ft_event_julia, scn);
-	mlx_hook(scn->win, 2, 3, ft_event_repeat, scn);
-	mlx_key_hook(scn->win, ft_event, scn);
-	mlx_key_hook(scn->win, ft_event, scn);
-	mlx_expose_hook(scn->win, ft_expose, scn);
+	ft_draw(app->scn[id]);
+	mlx_hook(app->scn[id]->win, 4, 1L<<6, ft_event_mouse, app->scn[id]);
+	if (id == 1)
+		mlx_hook(app->scn[id]->win, 6, 1L<<6, ft_event_julia, app->scn[id]);
+	mlx_hook(app->scn[id]->win, 2, 3, ft_event_repeat, app->scn[id]);
+	mlx_key_hook(app->scn[id]->win, ft_event, app);
+	mlx_expose_hook(app->scn[id]->win, ft_expose, app->scn[id]);
 }
 
 void 			ft_cpy_app_scn(t_app *app)
@@ -81,11 +86,9 @@ void 			ft_cpy_app_scn(t_app *app)
 	{
 		if (app->id_win[i])
 		{
-			app->scn[i].mlx = app->mlx;
-			app->scn[i].app = app;
-			app->scn[i].calc = app->calc[0];
-			ft_init_scene(&app->scn[i], i);
-			app->current = i;
+			app->scn[i] = (t_scene*)ft_memalloc(sizeof(t_scene));
+			ft_init_scene(app, i);
+			app->c = i;
 		}
 		i++;
 	}
