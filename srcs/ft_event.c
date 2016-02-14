@@ -13,11 +13,34 @@ static int 	ft_event_color(int keycode, t_scene *scn)
 	return (1);
 }
 
+void		ft_destroy_win(t_app *app)
+{
+	int		i;
+	int 	find;
+
+	i = 0;
+	find = 0;
+	app->id_win[0] = 0;
+	while (i < NB_FRACTAL)
+	{
+		if (app->id_win[i])
+			find = 1;
+		i++;
+	}
+	if (!find)
+		exit(1);
+}
+
 int			ft_event(int keycode, t_scene *scn)
 {
 	printf("%d\n", keycode);
 	if (keycode == KEY_ESC)
-		exit(0);
+	{
+		mlx_destroy_window(scn->mlx, scn->win);
+		printf("DESTROY : %d\n", scn->id);
+		ft_destroy_win(scn->app);
+		return (1);
+	}
 	else if (keycode == KEY_ITE_UP)
 		scn->f->ite_max += 5;
 	else if (keycode == KEY_ITE_DOWN)

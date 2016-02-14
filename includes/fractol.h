@@ -58,7 +58,6 @@ typedef struct 		s_fractal
 
 typedef struct		s_scene
 {
-	void			*mlx;
 	void			*win;
 	t_img			*obj;
 	t_fractal		*f;
@@ -67,8 +66,20 @@ typedef struct		s_scene
 	int 			pos_y;
 	int				id_f;
 	int 			cmd;
-	int 			(*calc[NB_FRACTAL])(struct s_scene *scn, int x, int y, int ite);
+	int 			(*calc)(struct s_scene *scn, int x, int y, int ite);
+	void			*mlx;
+	struct s_app	*app;
+	int 			id;
 }					t_scene;
+
+typedef struct 		s_app
+{
+	t_scene			scn[NB_FRACTAL];
+	void			*mlx;
+	int 			(*calc[NB_FRACTAL])(struct s_scene *scn, int x, int y, int ite);
+	int 			id_win[NB_FRACTAL];
+	int 			current;
+}					t_app;
 
 t_fractal		*ft_init_fractal(void);
 int 			ft_calc_mandelbrot(t_scene *scn, int x, int y, int ite);
@@ -89,6 +100,6 @@ t_color			ft_get_color(unsigned char r, unsigned char g,
 void			ft_draw(t_scene *scn);
 
 void			ft_error(void);
-void			ft_check_name(char *name, t_scene *scn);
+void			ft_check_name(char *name, t_app *app);
 
 #endif

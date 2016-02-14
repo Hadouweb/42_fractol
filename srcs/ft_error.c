@@ -6,7 +6,7 @@ void	ft_error(void)
 	exit(1);
 }
 
-void	ft_check_name(char *name, t_scene *scn)
+void	ft_check_name(char *name, t_app *app)
 {
 	int			i;
 	const char 	*n[NB_FRACTAL] = {"mandelbrot", "julia", "burningship", "mandelbar", "newton"};
@@ -19,7 +19,7 @@ void	ft_check_name(char *name, t_scene *scn)
 		if (ft_strcmp(name, n[i]) == 0)
 		{
 			find = 1;
-			scn->id_f = i;
+			app->id_win[i] = 1;
 		}
 		i++;
 	}
