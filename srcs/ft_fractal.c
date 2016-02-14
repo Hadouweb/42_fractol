@@ -56,6 +56,20 @@ t_fractal       *ft_init_mandelbar(void)
     return (f);
 }
 
+t_fractal       *ft_init_newton(void)
+{
+    t_fractal   *f;
+
+    f = (t_fractal*)ft_memalloc(sizeof(t_fractal));
+    f->zoom = 100;
+    f->ite_max = 50;
+    f->x1 = 0;
+    f->y1 = 0;
+    f->formcr = 3;
+    f->formci = 3;
+    return (f);
+}
+
 int 			ft_calc_mandelbrot(t_scene *scn, int x, int y, int ite)
 {
 	double 	zr;
@@ -140,6 +154,29 @@ int             ft_calc_mandelbar(t_scene *scn, int x, int y, int ite)
         zi *= -1;
         zr = zr * zr - zi * zi + cr;
         zi = 2 * zi * tmp + ci;
+        ite++;
+    }
+    return (ite);
+}
+
+int             ft_calc_newton(t_scene *scn, int x, int y, int ite)
+{
+    double  zr;
+    double  zi;
+    double  cr;
+    double  ci;
+
+    ite = 100;
+    zr = 0;
+    zi = 0;
+    cr = (double)x / scn->f->zoom + scn->f->x1 - (scn->pos_x / scn->f->zoom);
+    ci = (double)y / scn->f->zoom + scn->f->y1 - (scn->pos_y / scn->f->zoom);
+    while (x > 0 || y > 0)
+    {
+        if (x % (int)(3 + scn->f->zoom / 100) == 1 && y % (int)(3 + scn->f->zoom / 100) == 1)
+            ite = 0;
+        y /= (int)(3 + scn->f->zoom / 100);
+        x /= (int)(3 + scn->f->zoom / 100);
         ite++;
     }
     return (ite);

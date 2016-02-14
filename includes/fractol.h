@@ -27,7 +27,7 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 
-# define NB_FRACTAL 4
+# define NB_FRACTAL 5
 
 typedef struct		s_img
 {
@@ -79,6 +79,8 @@ t_fractal       *ft_init_burningship(void);
 int             ft_calc_burningship(t_scene *scn, int x, int y, int ite);
 t_fractal       *ft_init_mandelbar(void);
 int             ft_calc_mandelbar(t_scene *scn, int x, int y, int ite);
+t_fractal       *ft_init_newton(void);
+int             ft_calc_newton(t_scene *scn, int x, int y, int ite);
 
 int 			ft_event_repeat(int keycode, t_scene *scn);
 
