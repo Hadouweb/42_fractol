@@ -37,11 +37,6 @@ static void		ft_init_colorset(t_scene *scn)
 
 void			ft_init_name(t_scene *scn)
 {
-	scn->init_fractal[0] = ft_init_mandelbrot;
-	scn->init_fractal[1] = ft_init_julia;
-	scn->init_fractal[2] = ft_init_burningship;
-	scn->init_fractal[3] = ft_init_mandelbar;
-	scn->init_fractal[4] = ft_init_newton;
 	scn->calc[0] = ft_calc_mandelbrot;
 	scn->calc[1] = ft_calc_julia;
 	scn->calc[2] = ft_calc_burningship;
@@ -54,7 +49,7 @@ static void		ft_init(t_scene *scn)
 	scn->mlx = mlx_init();
 	scn->win = mlx_new_window(scn->mlx, SIZE_W, SIZE_H, "FRACTOL");
 	scn->obj = ft_get_img_info(scn, SIZE_W, SIZE_H);
-	scn->f = scn->init_fractal[scn->id_f]();
+	scn->f = ft_init_fractal();
 	ft_init_colorset(scn);
 	scn->pos_x = SIZE_W / 2 - fabs(scn->f->zoom * scn->f->x1);
 	scn->pos_y = SIZE_H / 2 - fabs(scn->f->zoom * scn->f->y1);

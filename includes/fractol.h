@@ -67,19 +67,14 @@ typedef struct		s_scene
 	int 			pos_y;
 	int				id_f;
 	int 			cmd;
-	t_fractal 		*(*init_fractal[NB_FRACTAL])(void);
 	int 			(*calc[NB_FRACTAL])(struct s_scene *scn, int x, int y, int ite);
 }					t_scene;
 
-t_fractal		*ft_init_mandelbrot(void);
+t_fractal		*ft_init_fractal(void);
 int 			ft_calc_mandelbrot(t_scene *scn, int x, int y, int ite);
-t_fractal       *ft_init_julia(void);
 int             ft_calc_julia(t_scene *scn, int x, int y, int ite);
-t_fractal       *ft_init_burningship(void);
 int             ft_calc_burningship(t_scene *scn, int x, int y, int ite);
-t_fractal       *ft_init_mandelbar(void);
 int             ft_calc_mandelbar(t_scene *scn, int x, int y, int ite);
-t_fractal       *ft_init_newton(void);
 int             ft_calc_newton(t_scene *scn, int x, int y, int ite);
 
 int 			ft_event_repeat(int keycode, t_scene *scn);
