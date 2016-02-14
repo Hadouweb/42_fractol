@@ -40,9 +40,11 @@ void			ft_init_name(t_scene *scn)
 	scn->init_fractal[0] = ft_init_mandelbrot;
 	scn->init_fractal[1] = ft_init_julia;
 	scn->init_fractal[2] = ft_init_burningship;
+	scn->init_fractal[3] = ft_init_mandelbar;
 	scn->calc[0] = ft_calc_mandelbrot;
 	scn->calc[1] = ft_calc_julia;
 	scn->calc[2] = ft_calc_burningship;
+	scn->calc[3] = ft_calc_mandelbar;
 }
 
 static void		ft_init(t_scene *scn)
