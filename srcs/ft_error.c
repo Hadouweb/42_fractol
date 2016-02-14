@@ -1,15 +1,16 @@
 #include "fractol.h"
 
-void	ft_error(void)
+void	ft_error(char *str)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd("Error : ", 2);
+	ft_putstr_fd(str, 2);
 	exit(1);
 }
 
 void	ft_check_name(char *name, t_app *app)
 {
 	int			i;
-	const char 	*n[NB_FRACTAL] = {"mandelbrot", "julia", "burningship", "mandelbar", "newton"};
+	const char 	*n[NB_FRACTAL] = {"mandelbrot", "julia", "burningship", "mandelbar"};
 	int			find;
 
 	i = 0;
@@ -24,5 +25,5 @@ void	ft_check_name(char *name, t_app *app)
 		i++;
 	}
 	if (!find)
-		ft_error();
+		ft_error("This fractal does not exist\n");
 }

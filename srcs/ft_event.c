@@ -41,6 +41,16 @@ void		ft_destroy_win(t_app *app)
 		exit(1);
 }
 
+int 			ft_expose(t_scene *scn)
+{
+	int 	i;
+
+	i = 0;
+	scn->app->c = scn->id;
+	printf("CURRENT %d %p\n", scn->app->c, scn->app);
+	return (scn->id);
+}
+
 int			ft_event(int keycode, t_app *app)
 {
 	printf("%d\n", keycode);
@@ -117,8 +127,8 @@ int			ft_event_mouse(int button, int x, int y, t_scene *scn)
 	}
 	else if (button == KEY_DEZOOM && scn->f->zoom > 10)
 	{
-		scn->f->x1 -= ((double)x - scn->pos_x) / scn->f->zoom / 10;
- 		scn->f->y1 -= ((double)y - scn->pos_y) / scn->f->zoom / 10;
+		scn->f->x1 -= ((double)x - scn->pos_x) / scn->f->zoom / 6;
+ 		scn->f->y1 -= ((double)y - scn->pos_y) / scn->f->zoom / 6;
 		scn->f->zoom /= h;
 		scn->f->ite_max -= 1;
 	}

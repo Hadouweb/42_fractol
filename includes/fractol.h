@@ -7,8 +7,8 @@
 # include <time.h>
 # include <math.h>
 
-# define SIZE_H 500
-# define SIZE_W 500
+# define SIZE_H 1000
+# define SIZE_W 1000
 
 # define KEY_ESC 53
 
@@ -27,7 +27,7 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 
-# define NB_FRACTAL 5
+# define NB_FRACTAL 4
 
 typedef struct		s_img
 {
@@ -67,6 +67,7 @@ typedef struct		s_scene
 	int				id_f;
 	int 			cmd;
 	int 			(*calc)(struct s_scene *scn, int x, int y, int ite);
+	char			*name;
 	void			*mlx;
 	int 			id;
 	struct s_app	*app;
@@ -99,7 +100,9 @@ t_color			ft_get_color(unsigned char r, unsigned char g,
 					unsigned char b, unsigned char a);
 void			ft_draw(t_scene *scn);
 
-void			ft_error(void);
+void			ft_error(char *str);
 void			ft_check_name(char *name, t_app *app);
+int 			ft_expose(t_scene *scn);
 
+void			ft_init_app(t_app *app);
 #endif
