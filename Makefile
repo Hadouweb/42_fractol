@@ -16,6 +16,7 @@ SRC = 	$(SRCPATH)/main.c\
 		$(SRCPATH)/ft_event_repeat.c\
 		$(SRCPATH)/ft_fractal.c\
 		$(SRCPATH)/ft_init.c\
+		$(SRCPATH)/ft_util.c\
 		$(SRCPATH)/ft_error.c\
 
 OBJ = $(SRC:.c=.o)

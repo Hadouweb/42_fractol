@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/02/15 00:12:59 by nle-bret          #+#    #+#             */
+/*   Updated: 2016/02/15 00:13:00 by nle-bret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 static t_img	*ft_init_img_info(void *mlx, int width, int height)
@@ -31,29 +43,6 @@ static void		ft_init_name(t_app *app)
 	app->calc[3] = ft_calc_mandelbar;
 }
 
-char			*ft_get_name(t_app *app, int id)
-{
-	char	*name;
-	char 	*tmp_id;
-	char 	*tmp_id2;
-	char 	*tmp_id3;
-
-	if ((name = ft_strdup(app->n[id])) == NULL)
-		ft_error("Malloc name\n");
-	if (name[0])
-	{
-		name[0] -= 32;
-		tmp_id = ft_strdup(" [");
-		tmp_id2 = ft_strjoin(tmp_id, ft_itoa(id));
-		ft_strdel(&tmp_id);
-		tmp_id3 = ft_strjoin(tmp_id2, "]");
-		ft_strdel(&tmp_id2);
-		name = ft_strjoin(name, tmp_id3);
-		ft_strdel(&tmp_id3);
-	}
-	return (name);
-}
-
 static void		ft_init_scene(t_app *app, int id)
 {
 	app->scn[id]->app = app;
@@ -61,17 +50,20 @@ static void		ft_init_scene(t_app *app, int id)
 	app->scn[id]->calc = app->calc[id];
 	app->scn[id]->id = id;
 	app->scn[id]->name = ft_get_name(app, id);
-	app->scn[id]->win = mlx_new_window(app->scn[id]->mlx, SIZE_W, SIZE_H, app->scn[id]->name);
+	app->scn[id]->win = mlx_new_window(app->scn[id]->mlx, SIZE_W, SIZE_H,
+		app->scn[id]->name);
 	app->scn[id]->obj = ft_init_img_info(app->scn[id]->mlx, SIZE_W, SIZE_H);
 	app->scn[id]->f = ft_init_fractal();
 	ft_init_colorset(app->scn[id]);
-	app->scn[id]->pos_x = SIZE_W / 2 - fabs(app->scn[id]->f->zoom * app->scn[id]->f->x1);
-	app->scn[id]->pos_y = SIZE_H / 2 - fabs(app->scn[id]->f->zoom * app->scn[id]->f->y1);
+	app->scn[id]->pos_x = SIZE_W / 2 -
+		fabs(app->scn[id]->f->zoom * app->scn[id]->f->x1);
+	app->scn[id]->pos_y = SIZE_H / 2 -
+		fabs(app->scn[id]->f->zoom * app->scn[id]->f->y1);
 	app->scn[id]->cmd = 0;
 	ft_draw(app->scn[id]);
-	mlx_hook(app->scn[id]->win, 4, 1L<<6, ft_event_mouse, app->scn[id]);
+	mlx_hook(app->scn[id]->win, 4, 1L << 6, ft_event_mouse, app->scn[id]);
 	if (id == 1)
-		mlx_hook(app->scn[id]->win, 6, 1L<<6, ft_event_julia, app->scn[id]);
+		mlx_hook(app->scn[id]->win, 6, 1L << 6, ft_event_julia, app->scn[id]);
 	mlx_hook(app->scn[id]->win, 2, 3, ft_event_repeat, app->scn[id]);
 	mlx_key_hook(app->scn[id]->win, ft_event, app);
 	mlx_expose_hook(app->scn[id]->win, ft_expose, app->scn[id]);
@@ -79,7 +71,7 @@ static void		ft_init_scene(t_app *app, int id)
 
 void			ft_init_app(t_app *app)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
 	ft_init_name(app);

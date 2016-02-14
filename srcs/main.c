@@ -12,17 +12,19 @@
 
 #include "fractol.h"
 
-int				main(int ac, char **av)
+int		main(int ac, char **av)
 {
-	int 	i;
+	int		i;
+	int		nbr;
 	t_app	app;
 
 	i = 1;
+	nbr = NB_FRACTAL;
 	if (ac < 2)
 		ft_error("Bad number args\n");
 	else
 	{
-		ft_bzero(app.id_win, NB_FRACTAL * sizeof(int));
+		ft_bzero(app.id_win, nbr * sizeof(int));
 		while (i < ac)
 		{
 			ft_check_name(av[i], &app);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_draw.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nle-bret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/02/15 00:24:04 by nle-bret          #+#    #+#             */
+/*   Updated: 2016/02/15 00:24:06 by nle-bret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 static t_color	ft_choice_color(t_color cs[5], int i, int m)
@@ -11,9 +23,11 @@ static t_color	ft_choice_color(t_color cs[5], int i, int m)
 	else if (i * 3 < m)
 		color = ft_get_color(cs[2].r * i * 3 / m, cs[2].g, cs[2].b, 0);
 	else if (i * 2 < m)
-		color = ft_get_color(cs[3].r * i * 2 / m, cs[3].g * i * 2 / m, cs[3].b * i * 2 / m, 0);
+		color = ft_get_color(cs[3].r * i * 2 / m, cs[3].g * i * 2 / m,
+			cs[3].b * i * 2 / m, 0);
 	else if (i < m)
-		color = ft_get_color(cs[4].r * i / m, cs[4].g * i / m, cs[4].b * i / m, 0);		
+		color = ft_get_color(cs[4].r * i / m, cs[4].g * i / m,
+			cs[4].b * i / m, 0);
 	return (color);
 }
 
@@ -40,22 +54,23 @@ t_color			ft_get_color(unsigned char r, unsigned char g,
 
 void			ft_draw(t_scene *scn)
 {
-	int 	x;
-	int 	y;
-	int 	i;
+	int		x;
+	int		y;
+	int		i;
 
 	i = 0;
 	x = 0;
 	while (x < SIZE_W)
 	{
 		y = 0;
-	   	while (y < SIZE_H)
-	   	{
-	   		i = scn->calc(scn, x, y, 0);
-		    ft_generate_image(scn->obj, x, y, ft_choice_color(scn->cs, i, scn->f->ite_max));
+		while (y < SIZE_H)
+		{
+			i = scn->calc(scn, x, y, 0);
+			ft_generate_image(scn->obj, x, y,
+				ft_choice_color(scn->cs, i, scn->f->ite_max));
 			y++;
-	    }
-	    x++;
+		}
+		x++;
 	}
 	mlx_put_image_to_window(scn->mlx, scn->win, scn->obj->img, 0, 0);
 }
