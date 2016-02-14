@@ -31,11 +31,26 @@ static void		ft_init_name(t_app *app)
 	app->calc[3] = ft_calc_mandelbar;
 }
 
-char			*ft_get_name(int id)
+char			*ft_get_name(t_app *app, int id)
 {
 	char	*name;
+	char 	*tmp_id;
+	char 	*tmp_id2;
+	char 	*tmp_id3;
 
-	name = ft_itoa(id);
+	if ((name = ft_strdup(app->n[id])) == NULL)
+		ft_error("Malloc name\n");
+	if (name[0])
+	{
+		name[0] -= 32;
+		tmp_id = ft_strdup(" [");
+		tmp_id2 = ft_strjoin(tmp_id, ft_itoa(id));
+		ft_strdel(&tmp_id);
+		tmp_id3 = ft_strjoin(tmp_id2, "]");
+		ft_strdel(&tmp_id2);
+		name = ft_strjoin(name, tmp_id3);
+		ft_strdel(&tmp_id3);
+	}
 	return (name);
 }
 
@@ -45,7 +60,7 @@ static void		ft_init_scene(t_app *app, int id)
 	app->scn[id]->mlx = app->mlx;
 	app->scn[id]->calc = app->calc[id];
 	app->scn[id]->id = id;
-	app->scn[id]->name = ft_get_name(id);
+	app->scn[id]->name = ft_get_name(app, id);
 	app->scn[id]->win = mlx_new_window(app->scn[id]->mlx, SIZE_W, SIZE_H, app->scn[id]->name);
 	app->scn[id]->obj = ft_init_img_info(app->scn[id]->mlx, SIZE_W, SIZE_H);
 	app->scn[id]->f = ft_init_fractal();
@@ -74,7 +89,7 @@ void			ft_init_app(t_app *app)
 		if (app->id_win[i])
 		{
 			if ((app->scn[i] = (t_scene*)ft_memalloc(sizeof(t_scene))) == NULL)
-				ft_error("Error malloc app->scn\n");
+				ft_error("Malloc app->scn\n");
 			ft_init_scene(app, i);
 			app->c = i;
 		}

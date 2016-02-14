@@ -80,6 +80,7 @@ typedef struct 		s_app
 	int 			(*calc[NB_FRACTAL])(struct s_scene *scn, int x, int y, int ite);
 	int 			id_win[NB_FRACTAL];
 	int 			c;
+	char 			*n[NB_FRACTAL];
 }					t_app;
 
 t_fractal		*ft_init_fractal(void);
