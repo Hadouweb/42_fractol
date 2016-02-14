@@ -9,7 +9,8 @@ t_fractal		*ft_init_mandelbrot(void)
 	f->ite_max = 50;
 	f->x1 = -2.1;
 	f->y1 = -2;
-    f->form = 0;
+    f->formcr = 0;
+    f->formci = 0;
 	return (f);
 }
 
@@ -19,10 +20,11 @@ t_fractal       *ft_init_julia(void)
 
     f = (t_fractal*)ft_memalloc(sizeof(t_fractal));
     f->zoom = 200;
-    f->ite_max = 50;
+    f->ite_max = 20;
     f->x1 = -1;
     f->y1 = -1.2;
-    f->form = 0.01;
+    f->formcr = 0;
+    f->formci = 0;
     return (f);
 }
 
@@ -58,8 +60,8 @@ int             ft_calc_julia(t_scene *scn, int x, int y, int ite)
 
     zr = (double)x / scn->f->zoom + scn->f->x1 - (scn->pos_x / scn->f->zoom);
     zi = (double)y / scn->f->zoom + scn->f->y1 - (scn->pos_y / scn->f->zoom);
-    cr = 0.285 + scn->f->form;
-    ci = 0.01 + scn->f->form;
+    cr = scn->f->formcr;
+    ci = scn->f->formci;
     while (zr * zr + zi * zi < 4 && ite < scn->f->ite_max)
     {
         tmp = zr;

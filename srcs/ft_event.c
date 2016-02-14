@@ -37,9 +37,13 @@ int			ft_event(int keycode, t_scene *scn)
 
 int 		ft_event_julia(int x, int y, t_scene *scn)
 {
-	scn->f->form = (double)(x * y) / (SIZE_W * SIZE_H) * 2;
-	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
-	ft_draw(scn);
+	if (x > 0 && x < SIZE_W && y > 0 && y < SIZE_H)
+	{
+		scn->f->formcr = ((double)x - scn->pos_x) / scn->f->zoom;
+		scn->f->formci = ((double)y - scn->pos_y) / scn->f->zoom;
+		ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
+		ft_draw(scn);
+	}
 	return (1);
 }
 
@@ -57,22 +61,22 @@ static void	ft_rand_color(t_scene *scn)
 
 int			ft_event_mouse(int button, int x, int y, t_scene *scn)
 {
-	float 	h;
+	double 	h;
 
-	h = 1.1;
-	if (button == KEY_ZOOM && scn->f->zoom < 1073379187320315)
+	h = 1.2;
+	if (button == KEY_ZOOM)
 	{	
 		if (scn->cmd)
 			ft_rand_color(scn);
- 		scn->f->x1 += ((float)x - scn->pos_x) / scn->f->zoom / 10;
- 		scn->f->y1 += ((float)y - scn->pos_y) / scn->f->zoom / 10;
+ 		scn->f->x1 += ((double)x - scn->pos_x) / scn->f->zoom / 6;
+ 		scn->f->y1 += ((double)y - scn->pos_y) / scn->f->zoom / 6;
 		scn->f->ite_max += 1;
 		scn->f->zoom *= h;
 	}
 	else if (button == KEY_DEZOOM && scn->f->zoom > 10)
 	{
-		scn->f->x1 -= ((float)x - scn->pos_x) / scn->f->zoom / 10;
- 		scn->f->y1 -= ((float)y - scn->pos_y) / scn->f->zoom / 10;
+		scn->f->x1 -= ((double)x - scn->pos_x) / scn->f->zoom / 10;
+ 		scn->f->y1 -= ((double)y - scn->pos_y) / scn->f->zoom / 10;
 		scn->f->zoom /= h;
 		scn->f->ite_max -= 1;
 	}

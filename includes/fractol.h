@@ -52,7 +52,8 @@ typedef struct 		s_fractal
 	int 			ite_max;
 	double 			x1;
 	double 			y1;
-	double 			form;
+	double 			formcr;
+	double 			formci;
 }					t_fractal;
 
 typedef struct		s_scene
