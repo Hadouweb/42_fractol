@@ -54,7 +54,7 @@ static void		ft_init_scene(t_app *app, int id)
 	app->scn[id]->win = mlx_new_window(app->scn[id]->mlx, SIZE_W, SIZE_H,
 		app->scn[id]->name);
 	app->scn[id]->obj = ft_init_img_info(app->scn[id]->mlx, SIZE_W, SIZE_H);
-	app->scn[id]->menu = ft_init_img_info(app->scn[id]->mlx, SIZE_W - 10, 200);
+	app->scn[id]->menu = ft_init_img_info(app->scn[id]->mlx, SIZE_W, 200);
 	app->scn[id]->f = ft_init_fractal();
 	ft_init_colorset(app->scn[id]);
 	app->scn[id]->pos_x = SIZE_W / 2 -

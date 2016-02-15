@@ -1,54 +1,29 @@
 #include "fractol.h"
 
-static	void	ft_create_menu_tranform(t_scene *scn)
-{
-	unsigned int	c;
-
-	c = 0xffffff;
-	mlx_string_put(scn->mlx, scn->win, 20, 10, c, "Rotate X Top   : W");
-	mlx_string_put(scn->mlx, scn->win, 20, 25, c, "Rotate X Bot   : S");
-	mlx_string_put(scn->mlx, scn->win, 20, 45, c, "Rotate Y Left  : A");
-	mlx_string_put(scn->mlx, scn->win, 20, 60, c, "Rotate Y Right : D");
-	mlx_string_put(scn->mlx, scn->win, 20, 80, c, "Rotate Z Left  : Q");
-	mlx_string_put(scn->mlx, scn->win, 20, 95, c, "Rotate Z Right : E");
-	mlx_string_put(scn->mlx, scn->win, 230, 10, c, "Translate Top   : ^");
-	mlx_string_put(scn->mlx, scn->win, 230, 25, c, "Translate Bot   : v");
-	mlx_string_put(scn->mlx, scn->win, 230, 40, c, "Translate Left  : <");
-	mlx_string_put(scn->mlx, scn->win, 230, 55, c, "Translate Right : >");
-}
-
-static	void	ft_create_menu_map(t_scene *scn)
-{
-	unsigned int	c;
-
-	c = 0xffffff;
-	mlx_string_put(scn->mlx, scn->win, 700, 10, c, "Map 42          : X");
-	mlx_string_put(scn->mlx, scn->win, 700, 25, c, "Map elem        : C");
-	mlx_string_put(scn->mlx, scn->win, 700, 40, c, "Map pyra        : V");
-	mlx_string_put(scn->mlx, scn->win, 700, 55, c, "Map pyramide    : B");
-	mlx_string_put(scn->mlx, scn->win, 700, 70, c, "Map nle-bret    : N");
-	mlx_string_put(scn->mlx, scn->win, 700, 85, c, "Map Japan_L     : M");
-	mlx_string_put(scn->mlx, scn->win, 700, 100, c, "Map France_XXL  : <");
-}
-
 void			ft_create_text(t_scene *scn)
 {
-	unsigned int	c;
+	mlx_string_put(scn->mlx, scn->win, 20, 10, 0x0EEAFF, "Translate Top   : ^");
+	mlx_string_put(scn->mlx, scn->win, 280, 10, 0x0EEAFF, "Translate Bot   : v");
+	mlx_string_put(scn->mlx, scn->win, 530, 10, 0x0EEAFF, "Translate Left  : <");
+	mlx_string_put(scn->mlx, scn->win, 780, 10, 0x0EEAFF, "Translate Right : >");
 
-	c = 0xffffff;
-	ft_create_menu_tranform(scn);
-	ft_create_menu_map(scn);
-	mlx_string_put(scn->mlx, scn->win, 20, 140, c, "Projection Iso      : I");
-	mlx_string_put(scn->mlx, scn->win, 20, 155, c, "Projection Parallel : P");
-	mlx_string_put(scn->mlx, scn->win, 310, 140, c, "Color 1 : !");
-	mlx_string_put(scn->mlx, scn->win, 310, 155, c, "Color 2 : @");
-	mlx_string_put(scn->mlx, scn->win, 480, 140, c, "Color 3      : #");
-	mlx_string_put(scn->mlx, scn->win, 480, 155, c, "Color Random : $");
-	mlx_string_put(scn->mlx, scn->win, 440, 10, c, "Translate Zoom + : T");
-	mlx_string_put(scn->mlx, scn->win, 440, 25, c, "Translate Zoom - : R");
-	mlx_string_put(scn->mlx, scn->win, 440, 45, c, "Scale Z Up +     : G");
-	mlx_string_put(scn->mlx, scn->win, 440, 60, c, "Scale Z Bot -    : F");
-	mlx_string_put(scn->mlx, scn->win, 700, 150, c, "Exit            : ESC");
+	mlx_string_put(scn->mlx, scn->win, 20, 40, 0x15A9FA, "Mandelbrot      : 1");
+	mlx_string_put(scn->mlx, scn->win, 280, 40, 0x15A9FA, "Julia           : 2");
+	mlx_string_put(scn->mlx, scn->win, 530, 40, 0x15A9FA, "Burningship     : 3");
+	mlx_string_put(scn->mlx, scn->win, 780, 40, 0x15A9FA, "mandelbar       : 4");
+
+	mlx_string_put(scn->mlx, scn->win, 20, 70, 0x1B76FF, "Zoom            : Mouse wheel");
+	mlx_string_put(scn->mlx, scn->win, 530, 70, 0x1B76FF, "Dezoom          : Mouse wheel");
+
+	mlx_string_put(scn->mlx, scn->win, 20, 100, 0x1C3FFD, "Iteration up    : c");
+	mlx_string_put(scn->mlx, scn->win, 530, 100, 0x1C3FFD, "Iteration down  : v");
+
+	mlx_string_put(scn->mlx, scn->win, 20, 130, 0x2C1DFF, "Random color    : r");
+	mlx_string_put(scn->mlx, scn->win, 530, 130, 0x2C1DFF,
+		"Activ random color for zoom : CMD");
+
+	mlx_string_put(scn->mlx, scn->win, 20, 160, 0x1C13A3, "Menu            : z");
+	mlx_string_put(scn->mlx, scn->win, 530, 160, 0x1C13A3, "Exit            : esc");
 }
 
 void			ft_create_menu(t_scene *scn)
@@ -62,7 +37,7 @@ void			ft_create_menu(t_scene *scn)
 		x = 0;
 		while (x < SIZE_W)
 		{
-			ft_generate_image(scn->menu, x, y, ft_get_color(45, 45, 55, 100));
+			ft_generate_image(scn->menu, x, y, ft_get_color(0, 200, 255, 255 - y));
 			x++;
 		}
 		y++;

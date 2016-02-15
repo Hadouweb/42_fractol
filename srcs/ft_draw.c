@@ -38,6 +38,7 @@ void			ft_generate_image(t_img *obj, int x, int y, t_color color)
 	obj->data[y * obj->sizeline + x * obj->bpp / 8] = color.r;
 	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 1] = color.g;
 	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 2] = color.b;
+	obj->data[y * obj->sizeline + x * obj->bpp / 8 + 3] = color.a;
 }
 
 t_color			ft_get_color(unsigned char r, unsigned char g,
@@ -62,7 +63,7 @@ void			ft_draw(t_scene *scn)
 		ft_create_menu(scn);
 		mlx_put_image_to_window(scn->mlx, scn->win, scn->menu->img, 0, 0);
 		ft_create_text(scn);
-		ft_bzero(scn->obj->data, SIZE_W * 200 * 4);
+		ft_bzero(scn->menu->data, SIZE_W * 200 * 4);
 	}
 	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
 }
