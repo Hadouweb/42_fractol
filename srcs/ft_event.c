@@ -58,10 +58,16 @@ int			ft_event(int keycode, t_app *app)
 		ft_rand_color(app->scn[app->c]);
 	else if (ft_switch_fractal(keycode, app))
 		;
+	else if (keycode == KEY_MENU)
+	{
+		if (app->scn[app->c]->d_menu)
+			app->scn[app->c]->d_menu = 0;
+		else
+			app->scn[app->c]->d_menu = 1;
+	}
 	else
 		return (0);
-	ft_bzero(app->scn[app->c]->obj->data, SIZE_W * SIZE_H * 4);
-	ft_draw(app->scn[app->c]);
+	ft_calc_color(app->scn[app->c]);
 	return (1);
 }
 
@@ -80,8 +86,7 @@ int			ft_event_julia(int x, int y, t_scene *scn)
 	{
 		scn->f->formcr = ((double)x - scn->pos_x) / scn->f->zoom;
 		scn->f->formci = ((double)y - scn->pos_y) / scn->f->zoom;
-		ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
-		ft_draw(scn);
+		ft_calc_color(scn);
 	}
 	return (1);
 }
@@ -107,7 +112,8 @@ int			ft_event_mouse(int button, int x, int y, t_scene *scn)
 		scn->f->zoom /= h;
 		scn->f->ite_max -= 1;
 	}
-	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
-	ft_draw(scn);
+	else
+		return (0);
+	ft_calc_color(scn);
 	return (1);
 }

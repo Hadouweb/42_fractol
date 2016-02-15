@@ -46,6 +46,8 @@
 # define KEY_BURNINGSHIP 20
 # define KEY_MANDELBAR 21
 
+# define KEY_MENU 6
+
 typedef struct s_img		t_img;
 typedef struct s_color		t_color;
 typedef struct s_fractal	t_fractal;
@@ -88,11 +90,13 @@ struct				s_scene
 	char			*name;
 	void			*win;
 	t_img			*obj;
+	t_img			*menu;
 	t_fractal		*f;
 	t_color			cs[5];
 	int				pos_x;
 	int				pos_y;
 	int				cmd;
+	int 			d_menu;
 };
 
 struct				s_app
@@ -132,5 +136,9 @@ void				ft_init_app(t_app *app);
 char				*ft_get_name(t_app *app, int id);
 void				ft_rand_color(t_scene *scn);
 void				ft_destroy_win(t_app *app);
+
+void				ft_create_text(t_scene *scn);
+void				ft_create_menu(t_scene *scn);
+void				ft_calc_color(t_scene *scn);
 
 #endif

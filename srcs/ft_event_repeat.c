@@ -16,19 +16,20 @@ static int	ft_move(int keycode, t_scene *scn)
 {
 	if (keycode == KEY_UP)
 		scn->pos_y -= 10;
-	if (keycode == KEY_DOWN)
+	else if (keycode == KEY_DOWN)
 		scn->pos_y += 10;
-	if (keycode == KEY_LEFT)
+	else if (keycode == KEY_LEFT)
 		scn->pos_x -= 10;
-	if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_RIGHT)
 		scn->pos_x += 10;
+	else
+		return (0);
 	return (1);
 }
 
 int			ft_event_repeat(int keycode, t_scene *scn)
 {
-	ft_move(keycode, scn);
-	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
-	ft_draw(scn);
+	if (ft_move(keycode, scn))
+		ft_calc_color(scn);
 	return (1);
 }

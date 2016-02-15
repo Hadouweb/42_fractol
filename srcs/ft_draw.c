@@ -54,6 +54,21 @@ t_color			ft_get_color(unsigned char r, unsigned char g,
 
 void			ft_draw(t_scene *scn)
 {
+	if (!scn->d_menu)
+		mlx_clear_window(scn->mlx, scn->win);
+	mlx_put_image_to_window(scn->mlx, scn->win, scn->obj->img, 0, 0);
+	if (scn->d_menu)
+	{
+		ft_create_menu(scn);
+		mlx_put_image_to_window(scn->mlx, scn->win, scn->menu->img, 0, 0);
+		ft_create_text(scn);
+		ft_bzero(scn->obj->data, SIZE_W * 200 * 4);
+	}
+	ft_bzero(scn->obj->data, SIZE_W * SIZE_H * 4);
+}
+
+void			ft_calc_color(t_scene *scn)
+{
 	int		x;
 	int		y;
 	int		i;
@@ -72,5 +87,5 @@ void			ft_draw(t_scene *scn)
 		}
 		x++;
 	}
-	mlx_put_image_to_window(scn->mlx, scn->win, scn->obj->img, 0, 0);
+	ft_draw(scn);
 }

@@ -49,10 +49,12 @@ static void		ft_init_scene(t_app *app, int id)
 	app->scn[id]->mlx = app->mlx;
 	app->scn[id]->calc = app->calc[id];
 	app->scn[id]->id = id;
+	app->scn[id]->d_menu = 0;
 	app->scn[id]->name = ft_get_name(app, id);
 	app->scn[id]->win = mlx_new_window(app->scn[id]->mlx, SIZE_W, SIZE_H,
 		app->scn[id]->name);
 	app->scn[id]->obj = ft_init_img_info(app->scn[id]->mlx, SIZE_W, SIZE_H);
+	app->scn[id]->menu = ft_init_img_info(app->scn[id]->mlx, SIZE_W - 10, 200);
 	app->scn[id]->f = ft_init_fractal();
 	ft_init_colorset(app->scn[id]);
 	app->scn[id]->pos_x = SIZE_W / 2 -
@@ -60,7 +62,7 @@ static void		ft_init_scene(t_app *app, int id)
 	app->scn[id]->pos_y = SIZE_H / 2 -
 		fabs(app->scn[id]->f->zoom * app->scn[id]->f->y1);
 	app->scn[id]->cmd = 0;
-	ft_draw(app->scn[id]);
+	ft_calc_color(app->scn[id]);
 	mlx_hook(app->scn[id]->win, 4, 1L << 6, ft_event_mouse, app->scn[id]);
 	if (id == 1)
 		app->move = 1;
