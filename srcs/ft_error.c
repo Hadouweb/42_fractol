@@ -19,6 +19,18 @@ void	ft_error(char *str)
 	exit(1);
 }
 
+void	ft_error_print_param(char *str)
+{
+	ft_putstr_fd("Error : '", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("' is invalid\n", 2);
+	ft_putstr_fd("\t - mandelbrot\n", 2);
+	ft_putstr_fd("\t - julia\n", 2);
+	ft_putstr_fd("\t - burningship\n", 2);
+	ft_putstr_fd("\t - mandelbar\n", 2);
+	exit(1);
+}
+
 void	ft_check_name(char *name, t_app *app)
 {
 	int			i;
@@ -35,10 +47,12 @@ void	ft_check_name(char *name, t_app *app)
 		if (ft_strcmp(name, app->n[i]) == 0)
 		{
 			find = 1;
+			if (app->id_win[i])
+				ft_error_print_param("Duplicate param");
 			app->id_win[i] = 1;
 		}
 		i++;
 	}
 	if (!find)
-		ft_error("This fractal does not exist\n");
+		ft_error_print_param(name);
 }
