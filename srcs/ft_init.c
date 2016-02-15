@@ -63,7 +63,8 @@ static void		ft_init_scene(t_app *app, int id)
 	ft_draw(app->scn[id]);
 	mlx_hook(app->scn[id]->win, 4, 1L << 6, ft_event_mouse, app->scn[id]);
 	if (id == 1)
-		mlx_hook(app->scn[id]->win, 6, 1L << 6, ft_event_julia, app->scn[id]);
+		app->move = 1;
+	mlx_hook(app->scn[id]->win, 6, 1L << 6, ft_event_julia, app->scn[id]);
 	mlx_hook(app->scn[id]->win, 2, 3, ft_event_repeat, app->scn[id]);
 	mlx_key_hook(app->scn[id]->win, ft_event, app);
 	mlx_expose_hook(app->scn[id]->win, ft_expose, app->scn[id]);
@@ -76,14 +77,15 @@ void			ft_init_app(t_app *app)
 	i = 0;
 	ft_init_name(app);
 	app->mlx = mlx_init();
+	app->move = 0;
 	while (i < NB_FRACTAL)
 	{
 		if (app->id_win[i])
 		{
 			if ((app->scn[i] = (t_scene*)ft_memalloc(sizeof(t_scene))) == NULL)
 				ft_error("Malloc app->scn\n");
-			ft_init_scene(app, i);
 			app->c = i;
+			ft_init_scene(app, i);
 		}
 		i++;
 	}

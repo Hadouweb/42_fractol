@@ -41,6 +41,11 @@
 
 # define NB_FRACTAL 4
 
+# define KEY_MANDELBROT 18
+# define KEY_JULIA 19
+# define KEY_BURNINGSHIP 20
+# define KEY_MANDELBAR 21
+
 typedef struct s_img		t_img;
 typedef struct s_color		t_color;
 typedef struct s_fractal	t_fractal;
@@ -98,6 +103,7 @@ struct				s_app
 		int x, int y, int ite);
 	int				id_win[NB_FRACTAL];
 	int				c;
+	int				move;
 	char			*n[NB_FRACTAL];
 };
 
