@@ -652,7 +652,7 @@ void *mlx_new_window(mlx_ptr_t *mlx_ptr, int size_x, int size_y, char *title)
   newwin->pixmgt = 1;
   mlx_ptr->win_list = newwin;
 
-  NSRect windowRect = NSMakeRect(100, 100, size_x, size_y);
+  NSRect windowRect = NSMakeRect(1000, 100, size_x, size_y);
   str = [NSString stringWithCString:title encoding:NSASCIIStringEncoding];
   newwin->winid = [[MlxWin alloc] initWithRect:windowRect andTitle:str pfaAttrs:pfa_attrs];
   if (newwin->winid)

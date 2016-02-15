@@ -12,12 +12,11 @@ LIB = $(LIBFT)/libft.a $(MINILIBX)/libmlx.a -framework OpenGL -framework AppKit
 
 SRC = 	$(SRCPATH)/main.c\
 		$(SRCPATH)/ft_draw.c\
-		$(SRCPATH)/ft_event.c\
-		$(SRCPATH)/ft_event_repeat.c\
 		$(SRCPATH)/ft_fractal.c\
 		$(SRCPATH)/ft_init.c\
 		$(SRCPATH)/ft_util.c\
 		$(SRCPATH)/ft_menu.c\
+		$(SRCPATH)/ft_event.c\
 		$(SRCPATH)/ft_error.c\
 
 OBJ = $(SRC:.c=.o)

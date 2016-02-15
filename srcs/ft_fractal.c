@@ -20,8 +20,8 @@ t_fractal		*ft_init_fractal(void)
 		ft_error("Malloc init fractal\n");
 	f->zoom = 200;
 	f->ite_max = 50;
-	f->x1 = -2.1;
-	f->y1 = -2;
+	f->x1 = 0;
+	f->y1 = 0;
 	f->formcr = 0;
 	f->formci = 0;
 	return (f);

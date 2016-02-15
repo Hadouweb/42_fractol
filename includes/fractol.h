@@ -15,7 +15,6 @@
 
 # include "mlx.h"
 # include "libft.h"
-# include <stdio.h>
 # include <time.h>
 # include <math.h>
 
@@ -96,7 +95,7 @@ struct				s_scene
 	int				pos_x;
 	int				pos_y;
 	int				cmd;
-	int 			d_menu;
+	int				d_menu;
 };
 
 struct				s_app
@@ -111,34 +110,36 @@ struct				s_app
 	char			*n[NB_FRACTAL];
 };
 
+char				*ft_get_name(t_app *app, int id);
+void				ft_rand_color(t_scene *scn);
+void				ft_destroy_win(t_app *app);
+int					ft_expose(t_scene *scn);
+void				ft_swap_menu_cmd(t_app *app, int token);
+
+void				ft_create_text(t_scene *scn);
+void				ft_create_menu(t_scene *scn);
+
+void				ft_init_app(t_app *app);
+
 t_fractal			*ft_init_fractal(void);
 int					ft_calc_mandelbrot(t_scene *scn, int x, int y, int ite);
 int					ft_calc_julia(t_scene *scn, int x, int y, int ite);
 int					ft_calc_burningship(t_scene *scn, int x, int y, int ite);
 int					ft_calc_mandelbar(t_scene *scn, int x, int y, int ite);
 
-int					ft_event_repeat(int keycode, t_scene *scn);
-
 int					ft_event(int keycode, t_app *app);
-int					ft_event_mouse(int button, int x, int y, t_scene *scn);
+int					ft_event_repeat(int keycode, t_scene *scn);
 int					ft_event_julia(int x, int y, t_scene *scn);
+int					ft_event_mouse(int button, int x, int y, t_scene *scn);
+
+void				ft_error(char *str);
+void				ft_error_print_param(char *str);
+void				ft_check_name(char *name, t_app *app);
 
 void				ft_generate_image(t_img *obj, int x, int y, t_color color);
 t_color				ft_get_color(unsigned char r, unsigned char g,
-						unsigned char b, unsigned char a);
+	unsigned char b, unsigned char a);
 void				ft_draw(t_scene *scn);
-
-void				ft_error(char *str);
-void				ft_check_name(char *name, t_app *app);
-int					ft_expose(t_scene *scn);
-
-void				ft_init_app(t_app *app);
-char				*ft_get_name(t_app *app, int id);
-void				ft_rand_color(t_scene *scn);
-void				ft_destroy_win(t_app *app);
-
-void				ft_create_text(t_scene *scn);
-void				ft_create_menu(t_scene *scn);
 void				ft_calc_color(t_scene *scn);
 
 #endif

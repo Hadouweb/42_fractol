@@ -76,5 +76,32 @@ void		ft_destroy_win(t_app *app)
 		i++;
 	}
 	if (!find)
-		exit(1);
+		exit(0);
+}
+
+int			ft_expose(t_scene *scn)
+{
+	int		i;
+
+	i = 0;
+	scn->app->c = scn->id;
+	return (1);
+}
+
+void		ft_swap_menu_cmd(t_app *app, int token)
+{
+	if (token)
+	{
+		if (app->scn[app->c]->cmd)
+			app->scn[app->c]->cmd = 0;
+		else
+			app->scn[app->c]->cmd = 1;
+	}
+	else
+	{
+		if (app->scn[app->c]->d_menu)
+			app->scn[app->c]->d_menu = 0;
+		else
+			app->scn[app->c]->d_menu = 1;
+	}
 }
