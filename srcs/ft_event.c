@@ -84,8 +84,8 @@ int			ft_event_julia(int x, int y, t_scene *scn)
 {
 	if (scn->app->move && x > 0 && x < SIZE_W && y > 0 && y < SIZE_H)
 	{
-		scn->f->formcr = ((double)x - scn->pos_x) / scn->f->zoom;
-		scn->f->formci = ((double)y - scn->pos_y) / scn->f->zoom;
+		scn->f->formcr = (double)x / scn->f->zoom + scn->f->x1 - (scn->pos_x / scn->f->zoom);
+		scn->f->formci = (double)y / scn->f->zoom + scn->f->y1 - (scn->pos_y / scn->f->zoom);
 		ft_calc_color(scn);
 	}
 	return (1);
